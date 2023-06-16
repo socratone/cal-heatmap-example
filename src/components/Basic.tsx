@@ -1,13 +1,9 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// @ts-ignore
 import CalHeatmap from 'cal-heatmap';
-// @ts-ignore
 import Legend from 'cal-heatmap/plugins/Legend';
-// @ts-ignore
 import Tooltip from 'cal-heatmap/plugins/Tooltip';
 
-// Optionally import the CSS
 import 'cal-heatmap/cal-heatmap.css';
+
 const cal = new CalHeatmap();
 
 export default function Basic() {
@@ -86,7 +82,7 @@ export default function Basic() {
         >
           Next →
         </a>
-        <div id="legend" style={{ cssFloat: 'right' }}></div>
+        <div id="legend"></div>
       </div>
     </>
   );
