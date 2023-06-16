@@ -1,5 +1,11 @@
+import Basic from './components/Basic';
+
 function App() {
-  return <div>hello</div>;
+  return (
+    <div>
+      <Basic />
+    </div>
+  );
 }
 
 export default App;
