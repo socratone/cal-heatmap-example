@@ -1,4 +1,20 @@
-declare module 'cal-heatmap' {
+import type { Dayjs, PluginFunc } from 'dayjs';
+import type dayjs from 'dayjs';
+
+export type OptionsType = {
+  itemSelector: string;
+  range: number;
+  domain: DomainOptions;
+  subDomain: SubDomainOptions;
+  date: DateOptions;
+  data: DataOptions;
+  scale?: ScaleOptions;
+  animationDuration: number;
+  verticalOrientation: boolean;
+  theme: 'light' | 'dark';
+};
+
+declare namespace CalHeatmap {
   export type Timestamp = number;
   export type DomainType =
     | 'year'
@@ -19,7 +35,7 @@ declare module 'cal-heatmap' {
   // Template
 
   export type Template = {
-    (dateHelper: DateHelper, options: OptionsType): TemplateResult;
+    (dateHelper: any, options: OptionsType): TemplateResult;
   };
 
   export type TemplateResult = {
@@ -67,36 +83,41 @@ declare module 'cal-heatmap' {
     position?: 'top' | 'right' | 'bottom' | 'left';
     dimensions?: Dimensions;
     key?: string;
+    tickSize?: number;
+    width?: number;
+    itemSelector?: string;
+    label?: string;
+    text?: (date: Date, value: number, dayjsDate: Dayjs) => void;
   }
   export type PluginDefinition = [IPluginContructor, Partial<PluginOptions>?];
-
-  export default class CalHeatmap {
-    constructor();
-
-    paint(
-      options?: CalHeatmap.DeepPartial<OptionsType>,
-      plugins?: CalHeatmap.PluginDefinition[] | CalHeatmap.PluginDefinition
-    ): Promise<unknown>;
-
-    addTemplates(templates: CalHeatmap.Template | CalHeatmap.Template[]): void;
-
-    next(n?: number): Promise<unknown>;
-
-    previous(n?: number): Promise<unknown>;
-
-    jumpTo(date: Date, reset?: boolean): Promise<unknown>;
-
-    fill(dataSource?: OptionsType['data']['source']): Promise<unknown>;
-
-    on(name: string, fn: () => any): void;
-
-    dimensions(): CalHeatmap.Dimensions;
-
-    destroy(): Promise<unknown>;
-
-    extendDayjs(plugin: PluginFunc): dayjs.Dayjs;
-  }
 }
 
-declare module 'cal-heatmap/plugins/Legend';
-declare module 'cal-heatmap/plugins/Tooltip';
+declare class CalHeatmap {
+  constructor();
+
+  paint(
+    options?: CalHeatmap.DeepPartial<OptionsType>,
+    plugins?: CalHeatmap.PluginDefinition[] | CalHeatmap.PluginDefinition
+  ): Promise<unknown>;
+
+  addTemplates(templates: CalHeatmap.Template | CalHeatmap.Template[]): void;
+
+  next(n?: number): Promise<unknown>;
+
+  previous(n?: number): Promise<unknown>;
+
+  jumpTo(date: Date, reset?: boolean): Promise<unknown>;
+
+  fill(dataSource?: OptionsType['data']['source']): Promise<unknown>;
+
+  on(name: string, fn: () => any): void;
+
+  dimensions(): CalHeatmap.Dimensions;
+
+  destroy(): Promise<unknown>;
+
+  extendDayjs(plugin: PluginFunc): dayjs.Dayjs;
+}
+
+export = CalHeatmap;
+export as namespace CalHeatmap;

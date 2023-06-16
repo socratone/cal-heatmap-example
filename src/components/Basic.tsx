@@ -40,7 +40,7 @@ export default function Basic() {
       [
         Tooltip,
         {
-          text: function (date, value, dayjsDate) {
+          text: function (_, value, dayjsDate) {
             return (
               'score: ' + (value ? value : 0) + '.' + dayjsDate.format('LL')
             );
