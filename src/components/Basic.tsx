@@ -32,8 +32,10 @@ export default function Basic() {
       },
       domain: {
         type: 'month',
+        gutter: 4,
+        label: { text: 'MMM', textAlign: 'start', position: 'top' },
       },
-      subDomain: { type: 'day', radius: 2 },
+      subDomain: { type: 'ghDay', radius: 2, width: 11, height: 11, gutter: 4 },
       itemSelector: '#day',
     },
     [
